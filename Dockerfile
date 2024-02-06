@@ -8,13 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install the required Python packages
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy the entire back code to the working directory
 COPY . .
 
-# Expose the desired port (replace 8000 with your actual port)
-EXPOSE 8000
-
-# Set the entrypoint command to run the back code
-CMD ["python", "app.py"]
+COPY python3 -m flask run --host=0.0.0.0
