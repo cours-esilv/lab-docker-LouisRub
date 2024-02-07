@@ -1,15 +1,20 @@
+# Base image
 FROM python:3.9
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements.txt file to the working directory
+# Copy required files
 COPY requirements.txt .
 
-# Install the required Python packages
-RUN pip install -r requirements.txt
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire back code to the working directory
+# Copy the rest of the application code
 COPY . .
 
-COPY python3 -m flask run --host=0.0.0.0
+# Expose the port for Flask
+EXPOSE 8000
+
+# Run the Flask app
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
